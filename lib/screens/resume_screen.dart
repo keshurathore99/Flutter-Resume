@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -33,7 +32,7 @@ Future<Uint8List> generateResume(PdfPageFormat format, _) async {
                       crossAxisAlignment: pw.CrossAxisAlignment.start,
                       children: <pw.Widget>[
                     pw.Container(
-                        padding: const pw.EdgeInsets.only(bottom: 20),
+                        padding: const pw.EdgeInsets.only(bottom: 20, left: 4),
                         child: pw.Column(
                             crossAxisAlignment: pw.CrossAxisAlignment.start,
                             children: <pw.Widget>[
@@ -81,6 +80,16 @@ Future<Uint8List> generateResume(PdfPageFormat format, _) async {
                                     pw.Padding(padding: pw.EdgeInsets.zero)
                                   ]),
                             ])),
+                    Category(title: 'Education'),
+                    Block(
+                        title: 'Sarvodaya Kanya Vidyalaya, Delhi - 12th',
+                        timeline: 'Mar 2016 - Mar 2017'),
+                    pw.SizedBox(height: 4),
+                    Block(
+                        title:
+                            'Guru Nanak Dev Institute of Technology, Delhi - Diploma',
+                        timeline: 'Aug 2018 - Aug 2021'),
+                    pw.SizedBox(height: 15),
                     Category(title: 'Work Experience'),
                     Block(
                         title:
@@ -95,16 +104,6 @@ Future<Uint8List> generateResume(PdfPageFormat format, _) async {
                         timeline: 'Nov 2020 - Present',
                         description:
                             'Working as a Flutter Developer to develop iOS (Onelap GPS Tracker App) and Web (CRM) App.'),
-                    pw.SizedBox(height: 15),
-                    Category(title: 'Education'),
-                    Block(
-                        title: 'Sarvodaya Kanya Vidyalaya, Delhi - 12th',
-                        timeline: 'Mar 2016 - Mar 2017'),
-                    pw.SizedBox(height: 4),
-                    Block(
-                        title:
-                            'Guru Nanak Dev Institute of Technology, Delhi - Diploma',
-                        timeline: 'Aug 2018 - Aug 2021'),
                     pw.SizedBox(height: 15),
                     Category(title: 'Projects'),
                     Block(
@@ -158,23 +157,6 @@ Future<Uint8List> generateResume(PdfPageFormat format, _) async {
             ])
           ]));
   return doc.save();
-}
-
-Future<pw.PageTheme> _myPageTheme(PdfPageFormat format) async {
-  format = format.applyMargin(
-      left: 2.0 * PdfPageFormat.cm,
-      top: 4.0 * PdfPageFormat.cm,
-      right: 2.0 * PdfPageFormat.cm,
-      bottom: 2.0 * PdfPageFormat.cm);
-  return pw.PageTheme(
-      pageFormat: format,
-      theme: pw.ThemeData.withFont(
-          base: await PdfGoogleFonts.openSansRegular(),
-          bold: await PdfGoogleFonts.openSansBold(),
-          icons: await PdfGoogleFonts.materialIcons()),
-      buildBackground: (pw.Context context) {
-        return pw.FullPage(ignoreMargins: true);
-      });
 }
 
 class ResumeScreen extends StatelessWidget {
